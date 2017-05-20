@@ -8,22 +8,6 @@
 
 import Foundation
 
-func multiply(_ first: Double, by second: Double) -> Double {
-  return first * second;
-}
-
-func addition(_ first: Double, with second: Double) -> Double {
-  return first + second;
-}
-
-func substraction(_ first: Double, by second: Double) -> Double {
-  return first - second;
-}
-
-func division(_ first: Double, by second: Double) -> Double {
-  return first / second;
-}
-
 struct CalculatorBrain {
   private struct PendingBinaryOperation {
     var function: (Double, Double) -> Double
@@ -44,10 +28,12 @@ struct CalculatorBrain {
     "π": .Constant(Double.pi),
     "e": .Constant(M_E),
     "√": .UnaryOperator(sqrt),
-    "+": .BinaryOperator(addition),
-    "-": .BinaryOperator(substraction),
-    "×": .BinaryOperator(multiply),
-    "÷": .BinaryOperator(division),
+    "cos": .UnaryOperator(cos),
+    "±": .UnaryOperator({ -$0 }),
+    "+": .BinaryOperator({ $0 + $1 }),
+    "-": .BinaryOperator({ $0 - $1 }),
+    "×": .BinaryOperator({ $0 * $1 }),
+    "÷": .BinaryOperator({ $0 / $1 }),
     "=": .Equals
   ]
   
