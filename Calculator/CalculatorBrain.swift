@@ -77,14 +77,16 @@ struct CalculatorBrain {
           accumulator = nil
         }
       case .Equals:
-        if accumulator != nil && pendingBinaryOperation != nil {
-          accumulator = pendingBinaryOperation!.function(
-            pendingBinaryOperation!.firstOperand, accumulator!)
-          pendingBinaryOperation = nil
-        }
+        performBinaryOperation()
       }
     }
-    
-    
+  }
+  
+  private mutating func performBinaryOperation() {
+    if accumulator != nil && pendingBinaryOperation != nil {
+      accumulator = pendingBinaryOperation!.function(
+        pendingBinaryOperation!.firstOperand, accumulator!)
+      pendingBinaryOperation = nil
+    }
   }
 }
